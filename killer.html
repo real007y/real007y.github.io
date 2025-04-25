@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Confidential Contract Request</title>
+  <style>
+    body {
+      font-family: 'Courier New', Courier, monospace;
+      background-color: #1a1a1a;
+      color: #e6e6e6;
+      padding: 40px;
+    }
+
+    .form-box {
+      max-width: 650px;
+      margin: auto;
+      background-color: #2a2a2a;
+      padding: 30px;
+      border-radius: 10px;
+      border: 2px solid #ff4c4c;
+    }
+
+    h2 {
+      text-align: center;
+      color: #ff4c4c;
+    }
+
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border-radius: 5px;
+      border: none;
+      background: #333;
+      color: #fff;
+    }
+
+    button {
+      margin-top: 30px;
+      width: 100%;
+      padding: 15px;
+      background-color: #ff4c4c;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #cc0000;
+    }
+
+    .note {
+      font-size: 13px;
+      color: #aaa;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-box">
+  <h2>🕶️ Confidential Contract Request</h2>
+  <form id="contractForm">
+    <label for="clientName">Client Code Name:</label>
+    <input type="text" id="clientName" required>
+
+    <label for="targetName">Target Name:</label>
+    <input type="text" id="targetName" required>
+
+    <label for="reason">Reason for Hit:</label>
+    <textarea id="reason" rows="3" required></textarea>
+
+    <label for="budget">Budget (in USD):</label>
+    <input type="number" id="budget" required>
+
+    <label for="deadline">Deadline:</label>
+    <input type="date" id="deadline">
+
+    <label for="payment">Payment Method:</label>
+    <select id="payment" required>
+      <option value="">Select</option>
+      <option>Cash</option>
+      <option>Cryptocurrency</option>
+      <option>Gold</option>
+      <option>Other</option>
+    </select>
+
+    <label for="weapon">Preferred Weapon:</label>
+    <select id="weapon" required>
+      <option value="">Select</option>
+      <option>Sniper Rifle</option>
+      <option>Poison</option>
+      <option>Explosives</option>
+      <option>Knife/Blade</option>
+      <option>Custom Method</option>
+    </select>
+
+    <!-- Custom weapon name input (hidden by default) -->
+    <div id="customWeaponBox" class="hidden">
+      <label for="customWeapon">Enter Custom Weapon Name:</label>
+      <input type="text" id="customWeapon" placeholder="Describe your weapon...">
+    </div>
+
+    <label for="risk">Risk Level:</label>
+    <select id="risk" required>
+      <option value="">Select</option>
+      <option>Low</option>
+      <option>Medium</option>
+      <option>High</option>
+    </select>
+
+    <label for="alibi">Require Alibi Arrangement?</label>
+    <select id="alibi" required>
+      <option value="">Select</option>
+      <option>Yes</option>
+      <option>No</option>
+    </select>
+
+    <label for="tracker">Live Tracker Access?</label>
+    <select id="tracker" required>
+      <option value="">Select</option>
+      <option>Yes</option>
+      <option>No</option>
+    </select>
+
+    <label for="notes">Special Instructions:</label>
+    <textarea id="notes" rows="3"></textarea>
+
+    <button type="submit">Submit Contract Request</button>
+  </form>
+  <div class="note">⚠️ Entertainment use only. Not real. Just for storytelling.</div>
+</div>
+
+<script>
+  const weaponSelect = document.getElementById("weapon");
+  const customWeaponBox = document.getElementById("customWeaponBox");
+
+  weaponSelect.addEventListener("change", function () {
+    if (this.value === "Custom Method") {
+      customWeaponBox.classList.remove("hidden");
+    } else {
+      customWeaponBox.classList.add("hidden");
+    }
+  });
+
+  document.getElementById("contractForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let selectedWeapon = document.getElementById("weapon").value;
+    if (selectedWeapon === "Custom Method") {
+      selectedWeapon = document.getElementById("customWeapon").value || "Custom Method (unspecified)";
+    }
+
+    const data = {
+      client: document.getElementById("clientName").value,
+      target: document.getElementById("targetName").value,
+      reason: document.getElementById("reason").value,
+      budget: document.getElementById("budget").value,
+      deadline: document.getElementById("deadline").value,
+      payment: document.getElementById("payment").value,
+      weapon: selectedWeapon,
+      risk: document.getElementById("risk").value,
+      alibi: document.getElementById("alibi").value,
+      tracker: document.getElementById("tracker").value,
+      notes: document.getElementById("notes").value,
+    };
+
+    console.log("🕶️ Contract Request Submitted:", data);
+    alert("Request submitted. Agent will be in touch.");
+  });
+</script>
+
+</body>
+</html>
